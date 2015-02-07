@@ -5,5 +5,12 @@
 </head>
 <body>
     <h1>Hello static markup.</h1>
+    <h2 id="greeting"></h2>
+    <script src="lib/jquery/js/jquery.js"></script>
+    <script>
+        $(function () {
+            $('#greeting').text('Hello from jQuery, Grunt and Gulp');
+        })
+    </script>
 </body>
 </html>
