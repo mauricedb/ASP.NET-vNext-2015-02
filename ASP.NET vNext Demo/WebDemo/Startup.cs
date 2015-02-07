@@ -34,7 +34,7 @@ namespace WebDemo
 
             //app.Use((ctx, next) => ctx.Response.WriteAsync("<h1>Hello world.</h1>"));
 
-            app.UseWelcomePage();
+            //app.UseWelcomePage();
 
         }
     }
