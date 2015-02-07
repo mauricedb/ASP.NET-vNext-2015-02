@@ -2,6 +2,7 @@
 using System.Net;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
+using Microsoft.Framework.DependencyInjection;
 
 namespace WebDemo
 {
@@ -36,6 +37,13 @@ namespace WebDemo
 
             //app.UseWelcomePage();
 
+            
+            app.UseServices(svc =>
+            {
+                svc.AddMvc();
+            });
+            
+            app.UseMvc();
         }
     }
 }
