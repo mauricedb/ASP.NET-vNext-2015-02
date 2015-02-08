@@ -18,7 +18,7 @@
             $.getJSON('/api/books').then(function(books) {
                 books.forEach(function(book) {
                     $('<li>')
-                        .text(book.Title + ' by ' + book.Author)
+                        .text(book.title + ' by ' + book.author)
                         .appendTo('#books');
                 });
             });

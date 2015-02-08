@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Mvc;
+using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 using WebDemo.Models;
 
 namespace WebDemo
@@ -45,6 +49,14 @@ namespace WebDemo
                 svc.AddSingleton<IBooksRepository>(_ => new BooksRepository());
 
                 svc.AddMvc();
+                svc.Configure<MvcOptions>(options =>
+                {
+                    var jsonOutputFormatter =
+                        options.OutputFormatters.First(f => f.Instance is JsonOutputFormatter).Instance as
+                            JsonOutputFormatter;
+                    jsonOutputFormatter.SerializerSettings.ContractResolver =
+                        new CamelCasePropertyNamesContractResolver();
+                });
             });
 
             app.UseMvc();
