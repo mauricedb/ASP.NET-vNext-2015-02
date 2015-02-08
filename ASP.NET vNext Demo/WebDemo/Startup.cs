@@ -1,12 +1,15 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using Newtonsoft.Json.Serialization;
+using WebDemo.Formatters;
 using WebDemo.Models;
 
 namespace WebDemo
@@ -45,8 +48,7 @@ namespace WebDemo
 
             app.UseServices(svc =>
             {
-
-                svc.AddSingleton<IBooksRepository>(_ => new BooksRepository());
+                svc.AddSingleton<IBooksRepository, BooksRepository>();
 
                 svc.AddMvc();
                 svc.Configure<MvcOptions>(options =>
@@ -56,6 +58,11 @@ namespace WebDemo
                             JsonOutputFormatter;
                     jsonOutputFormatter.SerializerSettings.ContractResolver =
                         new CamelCasePropertyNamesContractResolver();
+
+                    var serviceDescriptor = svc.Single(s => s.ServiceType == typeof(IHostingEnvironment));
+                    var hostingEnvironment = (IHostingEnvironment)serviceDescriptor.ImplementationFactory(null);
+                    var jpegMediaTypeOutputFormatter = new JpegMediaTypeOutputFormatter(Path.Combine(hostingEnvironment.WebRoot, @"..\Images"));
+                    options.OutputFormatters.Add(jpegMediaTypeOutputFormatter);
                 });
             });
 

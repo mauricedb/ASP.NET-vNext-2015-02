@@ -6,26 +6,28 @@
     <title>Books</title>
 </head>
 <body>
-<h1>Books using jQuery and WebAPI</h1>
-<button id="load">Load</button>
-<ul id="books"></ul>
+    <h1>Books using jQuery and WebAPI</h1>
+    <button id="load">Load</button>
+    <ul id="books"></ul>
 
-<script src="lib/jquery/js/jquery.js"></script>
-<script>
-    $(function() {
-        $('#load').click(function() {
+    <script src="lib/jquery/js/jquery.js"></script>
+    <script>
+        $(function () {
+            $('#load').click(function () {
 
-            $.getJSON('/api/books').then(function(books) {
-                books.forEach(function(book) {
-                    $('<li>')
-                        .text(book.title + ' by ' + book.author)
-                        .appendTo('#books');
+                $.getJSON('/api/books').then(function (books) {
+                    books.forEach(function (book) {
+                        $('<li>')
+                            .text(book.title + ' by ' + book.author)
+                            .append($('<br>'))
+                            .append($('<img>').attr('src', '/api/books/' + book.id))
+                            .appendTo('#books');
+                    });
                 });
-            });
 
-        });
-    })
-</script>
+            });
+        })
+    </script>
 
 </body>
 </html>
