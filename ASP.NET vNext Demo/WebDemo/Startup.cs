@@ -3,6 +3,7 @@ using System.Net;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Framework.DependencyInjection;
+using WebDemo.Models;
 
 namespace WebDemo
 {
@@ -37,12 +38,15 @@ namespace WebDemo
 
             //app.UseWelcomePage();
 
-            
+
             app.UseServices(svc =>
             {
+
+                svc.AddSingleton<IBooksRepository>(_ => new BooksRepository());
+
                 svc.AddMvc();
             });
-            
+
             app.UseMvc();
         }
     }

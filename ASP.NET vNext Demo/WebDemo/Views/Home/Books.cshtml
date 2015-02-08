@@ -1,0 +1,41 @@
+﻿@using WebDemo.Models
+@model IEnumerable<WebDemo.Models.Book>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Books</title>
+</head>
+<body>
+    <h1>Books list</h1>
+    <div>
+
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Image</th>
+            </tr>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>
+                        @book.Title
+                    </td>
+                    <td>
+                        @book.Author
+                    </td>
+                    <td>
+                        @book.ImageName
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
