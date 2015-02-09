@@ -67,6 +67,9 @@ namespace WebDemo
             });
 
             app.UseMvc();
+
+            // Add static files to the request pipeline for self hosting
+            app.UseStaticFiles();
         }
     }
 }
