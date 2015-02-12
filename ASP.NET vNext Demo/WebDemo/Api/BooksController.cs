@@ -11,7 +11,12 @@ namespace WebDemo.Api
     [Route("api/[controller]")]
     public class BooksController : Controller
     {
-        private IBooksRepository _repo = new BooksRepository();
+        private IBooksRepository _repo;
+
+        public BooksController(IBooksRepository repo)
+        {
+            _repo = repo;
+        }
 
 
         // GET api/books
