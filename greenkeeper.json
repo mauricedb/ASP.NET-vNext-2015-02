@@ -1,0 +1,10 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "ASP.NET vNext Demo/WebApplication1/package.json",
+        "ASP.NET vNext Demo/WebDemo/package.json"
+      ]
+    }
+  }
+}
